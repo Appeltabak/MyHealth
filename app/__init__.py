@@ -12,9 +12,9 @@ from app.models import User
 from app import views
 
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], echo=True)
-if not database_exists(engine.url):
-        print "Database not found, creating new..."
-        create_database(engine.url)
+if not database_exists(app.config['SQLALCHEMY_DATABASE_URI']):
+    print "Database not found, creating new..."
+    create_database(app.config['SQLALCHEMY_DATABASE_URI'])
 Session = sessionmaker(bind=engine)
 session = Session()
 
