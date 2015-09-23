@@ -13,6 +13,13 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            username=self.username,
+            email=self.email
+        )
+
 
 class Bill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
