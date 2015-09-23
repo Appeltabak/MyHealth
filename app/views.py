@@ -41,8 +41,8 @@ def get_measurements(id):
 def get_userinfo(id):
     #user = User.query.one()
     #return json.dumps(user.to_dict())
-    return dict(
-        id=0,
-        username="jan",
-        email="jan@gmail.com"
-    )
+    return json.dumps({
+        'id':0,
+        'username':"jan",
+        'email':"jan@gmail.com"
+    })
