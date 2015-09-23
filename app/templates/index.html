@@ -1,0 +1,15 @@
+<head>
+    <script src="{{ url_for('static', filename='vendor/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/underscore-min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/backbone-min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='models/bill.js') }}"></script>
+    <script src="{{ url_for('static', filename='collections/bills.js') }}"></script>
+    <script src="{{ url_for('static', filename='views/billview.js') }}"></script>
+    <script src="{{ url_for('static', filename='views/billsview.js') }}"></script>
+</head>
+<body>
+    <script>
+        var billsView = new BillsView();
+    </script>
+</body>
