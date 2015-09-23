@@ -4,7 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="/static")
+app.debug = True
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
