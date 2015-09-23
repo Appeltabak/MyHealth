@@ -11,10 +11,10 @@ def init(app):
     from app.models import User
 
     engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], echo=False)
-    if not database_exists(engine.url):
-        print "Database not found, creating new..."
-        create_database(engine.url)
-        print "Done!"
+    # if not database_exists(engine.url):
+    #     print "Database not found, creating new..."
+    #     create_database(engine.url)
+    #     print "Done!"
 
     Session = sessionmaker(bind=engine)
     session = Session()
