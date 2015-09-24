@@ -20,11 +20,11 @@ def display_bills():
 @app.route('/api/bills')
 def bills():
     bills_collection = Bill.query.all()
-    return json.dumps([x.json_data() for x in bills_collection])
+    return json.dumps([b.to_dict() for b in bills_collection])
 
-@app.route('/api/user_verification/<username>/password')
+@app.route('/api/user_verification/<username>/<password>')
 def user_verification(username, password):
-    if username == "jan":
+    if username == "jan" and password == 'password':
         return 1
     else:
         return 0
@@ -42,7 +42,7 @@ def get_userinfo(id):
     #user = User.query.one()
     #return json.dumps(user.to_dict())
     return json.dumps({
-        'id':0,
-        'username':"jan",
-        'email':"jan@gmail.com"
+        'id': 0,
+        'username': "jan",
+        'email': "jan@gmail.com"
     })

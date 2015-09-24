@@ -34,7 +34,7 @@ class Bill(db.Model):
         self.id_medical_entity = id_medical_entity
         self.id_user = id_user
 
-    def json_data(self):
+    def to_dict(self):
         return dict(
             id=self.id,
             description=self.description,
