@@ -14,7 +14,6 @@ pytest==2.7.3
 pytest-cov==2.1.0
 six==1.9.0
 SQLAlchemy==1.0.8
-
 Werkzeug==0.10.4
 argparse==1.2.1
 psycopg2==2.6.1
