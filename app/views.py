@@ -22,12 +22,16 @@ def bills():
     bills_collection = Bill.query.all()
     return json.dumps([b.to_dict() for b in bills_collection])
 
+
 @app.route('/api/user_verification/<username>/<password>')
 def user_verification(username, password):
     if username == "jan" and password == 'password':
-        return 1
+        return json.dumps({
+            'id': 0
+        })
     else:
-        return 0
+        return 'Error', 401
+
 
 @app.route('/api/measurements/<id>')
 def get_measurements(id):
@@ -36,6 +40,7 @@ def get_measurements(id):
         'value': 5,
         'date': time.time()
     })
+
 
 @app.route('/api/userinfo/<id>')
 def get_userinfo(id):
