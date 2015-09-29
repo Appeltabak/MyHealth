@@ -1,7 +1,7 @@
+from shutil import rmtree
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
-from pip.util import rmtree
 
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
