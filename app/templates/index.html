@@ -8,10 +8,13 @@
     <script src="{{ url_for('static', filename='vendor/js/backbone-min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/js/bootstrap.min.js') }}"></script>
 
+    <script src="{{ url_for('static', filename='models/measurement.js') }}"></script>
     <script src="{{ url_for('static', filename='models/bill.js') }}"></script>
     <script src="{{ url_for('static', filename='collections/bills.js') }}"></script>
+    <script src="{{ url_for('static', filename='collections/measurements.js') }}"></script>
     <script src="{{ url_for('static', filename='views/billview.js') }}"></script>
     <script src="{{ url_for('static', filename='views/billsview.js') }}"></script>
+    <script src="{{ url_for('static', filename='views/measurementsview.js') }}"></script>
 </head>
 <body>
     <div class="jumbotron">
@@ -20,13 +23,26 @@
             <div>
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Bloeddruk</a></li>
+                    <li role="presentation" class="active"><a href="#bloodpressure" aria-controls="bloodpressure" role="tab" data-toggle="tab">Bloeddruk</a></li>
                     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">ECG</a></li>
                     <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Pulse</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="home">Yolo</div>
+                <div role="tabpanel" class="tab-pane fade in active" id="bloodpressure">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Datum</th>
+                            <th>Onderdruk</th>
+                            <th>Bovendruk</th>
+                        </tr>
+                        <tr>
+                            <td>30-09-2015</td>
+                            <td>60</td>
+                            <td>90</td>
+                        </tr>
+                    </table>
+                </div>
                 <div role="tabpanel" class="tab-pane fade" id="profile">Ietsanders</div>
                 <div role="tabpanel" class="tab-pane fade" id="messages">Edk</div>
             </div>
@@ -34,6 +50,7 @@
         </div>
     </div>
     <script>
+        var measurementsView = new MeasurementsView();
         var billsView = new BillsView();
     </script>
 </body>

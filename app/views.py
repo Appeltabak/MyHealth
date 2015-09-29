@@ -44,17 +44,19 @@ def get_measurements(type, id):
              'diastolic': 90,
              'date': time.time()
              },
-            {'id': int(id),
+            {'id': 2,
              'systolic': 80,
              'diastolic': 120,
              'date': time.time()
              },
-            {'id': int(id),
+            {'id': 3,
              'systolic': 90,
              'diastolic': 140,
              'date': time.time()
              }
         ])
+    else:
+        return "Unknown type", 404
 
 
 @app.route('/api/userinfo/<id>')
