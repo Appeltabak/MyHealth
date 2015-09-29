@@ -58,9 +58,10 @@ def upload_file():
     if request.method == 'POST':
         file = request.files['file']
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        new_name = str(int(time.time()))
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_name))
         user_id = request.form['user_id']
-        db_entry = Images(filename, os.path.splitext(filename)[1], user_id, time.time())
+        db_entry = Images(new_name, os.path.splitext(filename)[1], user_id, time.time())
         db.session.add(db_entry)
         db.session.commit()
         return "true"

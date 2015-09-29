@@ -12,7 +12,7 @@ app.debug = True
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
-from app.models import User
+from app.models import User, Images
 from app import views
 
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], echo=True, convert_unicode=True)
@@ -26,7 +26,9 @@ db.create_all()
 
 try:  # Reset saved files on each start
     pass
-    # rmtree(app.config['UPLOAD_FOLDER'], True)
-    # os.mkdir(app.config['UPLOAD_FOLDER'])
+    rmtree(app.config['UPLOAD_FOLDER'], True)
+    os.mkdir(app.config['UPLOAD_FOLDER'])
+    db.session.query(Images).delete()
+    db.session.commit()
 except OSError:
     pass
