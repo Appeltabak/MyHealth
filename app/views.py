@@ -2,9 +2,8 @@ import json
 import time
 
 from app import app
-from app.models import Bill, User
+from app.models import Bill
 from flask import render_template
-from flask.json import jsonify
 
 
 @app.route('/')
