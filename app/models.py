@@ -43,7 +43,7 @@ class Bill(db.Model):
             id_user=self.id_user
         )
 
-class ECGdata(db.Model):
+class Measurement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     start_timestamp = db.Column(db.Integer)
     offset = db.Column(db.Integer)
@@ -53,30 +53,6 @@ class ECGdata(db.Model):
         self.start_timestamp = start_timestamp
         self.offset = offset
         self.value = value
-
-class BloodPressure(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.Integer)
-    overdruk = db.Column(db.Integer)
-    onderdruk = db.Column(db.Integer)
-    user_id = db.Column(db.Integer)
-    
-    def __init__(self, timestamp, overdruk, onderdruk, user_id):
-        self.timestamp = timestamp
-        self.overdruk = overdruk
-        self.onderdruk = onderdruk
-        self.user_id = user_id
-
-class Pulse(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.Integer)
-    value = db.Column(db.Integer)
-    user_id = db.Column(db.Integer)
-    
-    def __init__(self, timestamp, value, user_id):
-        self.timestamp = timestamp
-        self.value = value
-        self.user_id = user_id
 
 class Images(db.Model):
     id = db.Column(db.Integer, primary_key=True)
