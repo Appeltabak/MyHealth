@@ -1,10 +1,12 @@
 import json
 import time
 
-from app import app
-from app.models import Bill, User
-from flask import render_template
+from app import app, db
+from app.models import Bill, Images
+from flask import render_template, request, url_for, send_from_directory, Response
 from flask.json import jsonify
+import os
+from werkzeug.utils import secure_filename, redirect
 
 
 @app.route('/')
@@ -32,7 +34,6 @@ def user_verification(username, password):
     else:
         return 'Error', 401
 
-
 @app.route('/api/measurements/<id>')
 def get_measurements(id):
     return json.dumps({
@@ -51,3 +52,30 @@ def get_userinfo(id):
         'username': "jan",
         'email': "jan@gmail.com"
     })
+
+@app.route('/api/upload_image', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        user_id = request.form['user_id']
+        db_entry = Images(filename, os.path.splitext(filename)[1], user_id, time.time())
+        db.session.add(db_entry)
+        db.session.commit()
+        return "true"
+
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file></p>
+        <input type=hidden value='1' name='user_id'>
+         <input type=submit value=Upload>
+    </form>
+    '''
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory("../" + app.config['UPLOAD_FOLDER'], filename, mimetype='image/jpg')

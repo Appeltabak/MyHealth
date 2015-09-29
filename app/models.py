@@ -42,3 +42,27 @@ class Bill(db.Model):
             id_medical_entity=self.id_medical_entity,
             id_user=self.id_user
         )
+
+class Measurement(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    start_timestamp = db.Column(db.Integer)
+    offset = db.Column(db.Integer)
+    value = db.Column(db.Numeric)
+
+    def __init__(self, start_timestamp, offset, value):
+        self.start_timestamp = start_timestamp
+        self.offset = offset
+        self.value = value
+
+class Images(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image_name = db.Column(db.String)
+    extension = db.Column(db.String)
+    user_id = db.Column(db.Integer)
+    upload_time = db.Column(db.Integer)
+
+    def __init__(self, image_name, extension, user_id, upload_time):
+        self.image_name = image_name
+        self.user_id = user_id
+        self.upload_time = upload_time
+        self.extension = extension
