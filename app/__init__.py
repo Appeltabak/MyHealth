@@ -1,5 +1,7 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+import os
+from pip.util import rmtree
 
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
@@ -21,3 +23,9 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 db.create_all()
+
+try:  # Reset saved files on each start
+    rmtree(app.config['UPLOAD_FOLDER'], True)
+    os.mkdir(app.config['UPLOAD_FOLDER'])
+except OSError:
+    pass
