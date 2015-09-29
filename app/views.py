@@ -32,19 +32,32 @@ def user_verification(username, password):
         return 'Error', 401
 
 
-@app.route('/api/measurements/<id>')
-def get_measurements(id):
-    return json.dumps({
-        'id': 0,
-        'value': 5,
-        'date': time.time()
-    })
+@app.route('/api/measurements/<type>/<id>')
+def get_measurements(type, id):
+    if type == 'bloodpressure':
+        return json.dumps([
+            {'id': int(id),
+             'systolic': 60,
+             'diastolic': 90,
+             'date': time.time()
+             },
+            {'id': int(id),
+             'systolic': 80,
+             'diastolic': 120,
+             'date': time.time()
+             },
+            {'id': int(id),
+             'systolic': 90,
+             'diastolic': 140,
+             'date': time.time()
+             }
+        ])
 
 
 @app.route('/api/userinfo/<id>')
 def get_userinfo(id):
-    #user = User.query.one()
-    #return json.dumps(user.to_dict())
+    # user = User.query.one()
+    # return json.dumps(user.to_dict())
     return json.dumps({
         'id': 0,
         'username': "jan",
