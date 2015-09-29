@@ -25,7 +25,8 @@ session = Session()
 db.create_all()
 
 try:  # Reset saved files on each start
-    rmtree(app.config['UPLOAD_FOLDER'], True)
-    os.mkdir(app.config['UPLOAD_FOLDER'])
+    pass
+    # rmtree(app.config['UPLOAD_FOLDER'], True)
+    # os.mkdir(app.config['UPLOAD_FOLDER'])
 except OSError:
     pass

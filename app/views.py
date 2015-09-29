@@ -3,7 +3,7 @@ import time
 
 from app import app, db
 from app.models import Bill, Images
-from flask import render_template, request, url_for, send_from_directory, Response
+from flask import render_template, request, url_for, send_from_directory, Response, send_file
 from flask.json import jsonify
 import os
 from werkzeug.utils import secure_filename, redirect
@@ -76,6 +76,7 @@ def upload_file():
     </form>
     '''
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory("../" + app.config['UPLOAD_FOLDER'], filename, mimetype='image/jpg')
+@app.route('/uploads/<id>')
+def uploaded_file(id):
+    db_object = Images.query.filter(Images.id == int(id)).first().image_name
+    return send_file("../" + app.config['UPLOAD_FOLDER'] + db_object, mimetype='image/jpg')
