@@ -64,7 +64,7 @@ def upload_file():
             print "File exception in request!"
             print "request object:"
             print request.files
-            return "false"
+            return "false", 400
         filename = secure_filename(file.filename)
         new_name = str(int(time.time()))
         try:
@@ -72,13 +72,13 @@ def upload_file():
         except Exception as e:
             print e
             print "Exception in saving file!"
-            return "false"
+            return "false", 500
         try:
             user_id = request.form['user_id']
         except Exception as e:
             print e
             print "Exception in user_id arg!"
-            return "false"
+            return "false", 400
 
         try:
             db_entry = Images(new_name, os.path.splitext(filename)[1], user_id, time.time())
@@ -87,7 +87,7 @@ def upload_file():
         except Exception as e:
             print e
             print "Database store error!"
-            return "false"
+            return "false", 500
         return "true"
 
     return '''
@@ -102,5 +102,9 @@ def upload_file():
 
 @app.route('/uploads/<id>')
 def uploaded_file(id):
-    db_object = Images.query.filter(Images.id == int(id)).first().image_name
+    try:
+        db_object = Images.query.filter(Images.id == int(id)).first().image_name
+    except AttributeError as e:
+        print "file not found!"
+        return "not found", 404
     return send_file("../" + app.config['UPLOAD_FOLDER'] + db_object, mimetype='image/jpg')
