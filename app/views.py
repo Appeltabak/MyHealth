@@ -56,14 +56,35 @@ def get_userinfo(id):
 @app.route('/api/upload_image', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        file = request.files['file']
+        try:
+            file = request.files['file']
+        except Exception as e:
+            print e
+            print "File exception in request!"
+            return "false"
         filename = secure_filename(file.filename)
         new_name = str(int(time.time()))
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_name))
-        user_id = request.form['user_id']
-        db_entry = Images(new_name, os.path.splitext(filename)[1], user_id, time.time())
-        db.session.add(db_entry)
-        db.session.commit()
+        try:
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_name))
+        except Exception as e:
+            print e
+            print "Exception in saving file!"
+            return "false"
+        try:
+            user_id = request.form['user_id']
+        except Exception as e:
+            print e
+            print "Exception in user_id arg!"
+            print "false"
+
+        try:
+            db_entry = Images(new_name, os.path.splitext(filename)[1], user_id, time.time())
+            db.session.add(db_entry)
+            db.session.commit()
+        except Exception as e:
+            print e
+            print "Database store error!"
+            return "falsex"
         return "true"
 
     return '''
@@ -72,7 +93,6 @@ def upload_file():
     <h1>Upload new File</h1>
     <form action="" method=post enctype=multipart/form-data>
       <p><input type=file name=file></p>
-        <input type=hidden value='1' name='user_id'>
          <input type=submit value=Upload>
     </form>
     '''
