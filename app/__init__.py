@@ -87,8 +87,8 @@ def populate_ecg():
 
 
 def populate_db():
-    admin = User("admin", "test@test.com")
-    db.session.add(admin)
+    #admin = User("admin", "test@test.com")
+    #db.session.add(admin)
 
     bill = Bill("First test Bill", 10, 1, 1)
     db.session.add(bill)
