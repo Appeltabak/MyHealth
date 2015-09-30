@@ -56,6 +56,8 @@ def get_userinfo(id):
 @app.route('/api/upload_image', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+        print "request:"
+        print request.headers
         try:
             file = request.files['file']
             print request.files
