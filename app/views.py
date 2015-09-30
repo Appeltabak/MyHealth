@@ -58,9 +58,12 @@ def upload_file():
     if request.method == 'POST':
         try:
             file = request.files['file']
+            print request.files
         except Exception as e:
             print e
             print "File exception in request!"
+            print "request object:"
+            print request.files
             return "false"
         filename = secure_filename(file.filename)
         new_name = str(int(time.time()))
@@ -75,7 +78,7 @@ def upload_file():
         except Exception as e:
             print e
             print "Exception in user_id arg!"
-            print "false"
+            return "false"
 
         try:
             db_entry = Images(new_name, os.path.splitext(filename)[1], user_id, time.time())
@@ -84,7 +87,7 @@ def upload_file():
         except Exception as e:
             print e
             print "Database store error!"
-            return "falsex"
+            return "false"
         return "true"
 
     return '''
