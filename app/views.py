@@ -90,7 +90,7 @@ def upload_file():
             print e
             print "Database store error!"
             return "false", 500
-        return "true"
+        return str(db_entry.id)
 
     return '''
     <!doctype html>
